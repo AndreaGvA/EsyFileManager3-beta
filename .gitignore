@@ -1,0 +1,7 @@
+node_modules/
+bower_components/
+uploads/
+uploads2/
+.DS_Store
+.project
+*.tar.gz
