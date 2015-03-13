@@ -1,4 +1,4 @@
-/*! esyFileManager3 - v3.0.0 - 2015-03-12 *//*!
+/*! esyFileManager3 - v3.0.0 - 2015-03-14 *//*!
  * jQuery JavaScript Library v1.11.2
  * http://jquery.com/
  *
@@ -25670,13 +25670,27 @@ $.fn.esyFileManager = function(options) {
   	debug("[EsyFileManager 3.0.0] - DEBUG MODE ACTIVE");
     return this.each(function() {
     $this = $(this);
-	if(o.mode=="input") {
-		$this.click(function(){
-			debug("[EsyFileManager 3.0.0] - OPEN THE FILEMANAGER - ref: head.js - LINE:10");
+		debug("[EsyFileManager 3.0.0] - CHECK THE MODE - ref: head.js - LINE:10");
+		debug(o.mode);
+		switch(o.mode.type) {
+			case "button":
+				debug("[EsyFileManager 3.0.0] - ATTACH THE WRAPPER - ref: head.js - LINE:12");
+				$this.wrap("<div class='"+o.prefix+"wrapper'></div>");
+				$("."+o.prefix+"wrapper").append("<div class='"+o.prefix+"button "+o.mode.selector+"'></div>");
+				$click=$("."+o.prefix+"button");
+				break;
+			default:
+				$click=$this;
+				break;
+		}
+		debug("[EsyFileManager 3.0.0] - THE MODE IS: "+o.mode.type+" - ref: head.js - LINE:17");
+		
+		$click.click(function(){ 
+			debug("[EsyFileManager 3.0.0] - OPEN THE FILEMANAGER - ref: head.js - LINE:20");
 			if($("."+o.prefix+"esyFileManager").length==0){
 				pos=position($this, 10);
-				style="top:"+pos.top+"px; left:"+pos.left+"px; width:"+pos.width+"; height:"+pos.height+";";
-				
+				style="top:"+pos.top+"px; left:"+pos.left+"px; width:"+pos.width+"; height:"+pos.height+";  z-index: 999999;";
+				 
 				debug("[EsyFileManager 3.0.0] - RENDER THE FILEMANAGER TEMPLATE - ref: head.js - LINE:16");
 				$("body").append($(template(style)).hide());
 				close();
@@ -25721,7 +25735,6 @@ $.fn.esyFileManager = function(options) {
 				listfiles();
 			}
 		});
-	}
   
   });
   
@@ -25824,22 +25837,22 @@ function attach() {
 	$("."+o.prefix+"attach").click(function(){
 		debug("[EsyFileManager 3.0.0] - START ATTACH FUNCTION - ref: fm.js - LINE:14");
 		$text=$("."+o.prefix+"selected").children("."+o.prefix+"name").html();
-		if(typeof o.files.replace!=="undefined") {
+		
+		if(!!o.files.replace) {
 			$this.val(o.files.replace+$text);
 		} else {
-			debug(o.files.dir);
 			$this.val(o.files.dir+$text);
 		}
 		
-		debug("[EsyFileManager 3.0.0] - FILE NAME ATTACHED - ref: fm.js - LINE:17");
-		$("."+o.prefix+"esyFileManager").remove();
-		debug("[EsyFileManager 3.0.0] - ATTACHED FILEMANAGER CLOSED - ref: fm.js - LINE:19");
+		debug("[EsyFileManager 3.0.0] - FILE NAME ATTACHED - ref: fm.js - LINE:26");
+		$("."+o.prefix+"esyFileManager").fadeOut("slow", function(){ $(this).remove(); });
+		debug("[EsyFileManager 3.0.0] - ATTACHED FILEMANAGER CLOSED - ref: fm.js - LINE:28");
 	});
 }
 
 function info() {
 	$("."+o.prefix+"info").click(function(){
-		debug("[EsyFileManager 3.0.0] - START INFO FUNCTION - ref: fm.js - LINE:14");
+		debug("[EsyFileManager 3.0.0] - START INFO FUNCTION - ref: fm.js - LINE:33");
 	});
 }
 function listfiles() {
@@ -26284,7 +26297,10 @@ $.fn.esyFileManager.defaults = {
   debug: true,
   prefix:"fm-",
   endpoint:'endpoint.php',
-  mode: "input",
+  mode: {
+  	type: "input", // input || button || download || tinyMce
+  	selector: "fm-open"
+  },
   size: true,
   width: 300,
   height: 400,
@@ -26304,6 +26320,10 @@ $(".apri").esyFileManager({
 	size:false
 });
 $(".apri2").esyFileManager({
+	mode: {
+		type:"button",
+		selector:"fm-open"	
+	},
 	files:{
 		dir:"uploads2/"
 	},

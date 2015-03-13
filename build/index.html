@@ -10,7 +10,59 @@
 	</head>
 	<body>
 		<input type="text" name="file" class='apri' />
-		<input type="text" name="file" class='apri2' />
+		<div style="text-align:right;"><input type="text" name="file" class='apri2' /></div>
+		
+		<textarea class="editor">Qui il testo</textarea>
 		<script type="application/javascript" src="js/main.min.js"></script>
-	</body>
+		<script type="application/javascript" src="ckeditor/ckeditor.js"></script>
+		<script type="application/javascript" src="ckeditor/adapters/jquery.js"></script>
+		<script> 
+		$( 'textarea.editor' ).ckeditor();
+		CKEDITOR.on( 'dialogDefinition', function( evt ) {
+			console.log(evt.data.name);
+		    if ( evt.data.name == 'image') {
+		        var def = evt.data.definition;
+		
+		        var onShow = def.onShow;
+		        def.onShow = function() {
+		            onShow && onShow.apply( this, arguments );
+		            
+		            var input = this.getContentElement( 'info', 'txtUrl' );
+		            $n=0;
+		            $.each(input, function(i, value){
+		            	//console.log(value);
+		            	
+		            	$input=value.inputId;
+		            	$n++;
+		            	if($n!=0) return false;
+		            });
+		           //console.log($input);
+		            $("#"+$input).esyFileManager();
+		        };
+		    }
+		    if ( evt.data.name == 'link') {
+		    	var def = evt.data.definition;
+		
+		        var onShow = def.onShow;
+		        def.onShow = function() {
+		            onShow && onShow.apply( this, arguments );
+		            console.log(this);
+		            var input = this.getContentElement( 'info', 'url' );
+		            //input=this.getContentElement('info', 'txtUrl').getInputElement().$.id;
+		            $n=0;
+		            $.each(input, function(i, value){
+		            	//console.log(value);
+		            	
+		            	$input=value.inputId;
+		            	$n++;
+		            	if($n!=0) return false;
+		            });
+		           //console.log($input);
+		            $("#"+$input).esyFileManager({mode:{ type:"button", selector: "fm-openf"}});
+		        };
+		    }
+		} );
+		
+		</script>
+	</body> 
 </html>

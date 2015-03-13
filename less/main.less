@@ -1,23 +1,20 @@
 .apri{
-  position:relative;
-  float:left;
-  margin-left:60px;
-  background-color:#000;
-  color:#fff;
+  background-color:#FFF;
+  color:#000;
   font-size:15px;
   padding:10px;
-  cursor:pointer;
+  border:1px solid #ccc;
 }
 
 .apri2{
-  position:absolute;
-  right:30px;
-  top:30px;
-  background-color:#000;
-  color:#fff;
+  background-color:#FFF;
+  color:#000;
   font-size:15px;
   padding:10px;
-  cursor:pointer;
+  border:1px solid #ccc;
+}
+.editor{
+  width:80%;
 }
 
 *{
@@ -34,6 +31,7 @@
   position: absolute;
   border: 1px solid #000;
   background-color:#fff;
+ 
   .fm-head {
     position:relative;
     float:left;
@@ -189,4 +187,29 @@
    }
   @import "icons.less";
 }
+//BUTTON
+.fm-wrapper{
+  position:relative !important;
+  .fm-button{
+    
+  }
+  .fm-open{
+    position:absolute;
+    width:40px;
+    height:40px;
+    background-color:#f00;
+    right:0px;
+    top:0px;
+  }
+  .fm-openf{
+    position:absolute;
+    width:40px;
+    height:100%;
+    background-color:#f00;
+    right:0px;
+    top:0px;
+  }
+}
+
+
 @import "fineuploader.less";

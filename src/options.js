@@ -19,7 +19,10 @@ $.fn.esyFileManager.defaults = {
   debug: true,
   prefix:"fm-",
   endpoint:'endpoint.php',
-  mode: "input",
+  mode: {
+  	type: "input", // input || button || download || tinyMce
+  	selector: "fm-open"
+  },
   size: true,
   width: 300,
   height: 400,
@@ -39,6 +42,10 @@ $(".apri").esyFileManager({
 	size:false
 });
 $(".apri2").esyFileManager({
+	mode: {
+		type:"button",
+		selector:"fm-open"	
+	},
 	files:{
 		dir:"uploads2/"
 	},

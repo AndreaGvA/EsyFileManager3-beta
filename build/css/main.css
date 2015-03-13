@@ -1,22 +1,19 @@
 .apri {
-  position: relative;
-  float: left;
-  margin-left: 60px;
-  background-color: #000;
-  color: #fff;
+  background-color: #FFF;
+  color: #000;
   font-size: 15px;
   padding: 10px;
-  cursor: pointer;
+  border: 1px solid #ccc;
 }
 .apri2 {
-  position: absolute;
-  right: 30px;
-  top: 30px;
-  background-color: #000;
-  color: #fff;
+  background-color: #FFF;
+  color: #000;
   font-size: 15px;
   padding: 10px;
-  cursor: pointer;
+  border: 1px solid #ccc;
+}
+.editor {
+  width: 80%;
 }
 * {
   box-sizing: border-box;
@@ -671,6 +668,25 @@
   background: url('../images/ico.png') no-repeat;
   padding-top: 5px;
   padding-bottom: 5px;
+}
+.fm-wrapper {
+  position: relative !important;
+}
+.fm-wrapper .fm-open {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background-color: #f00;
+  right: 0px;
+  top: 0px;
+}
+.fm-wrapper .fm-openf {
+  position: absolute;
+  width: 40px;
+  height: 100%;
+  background-color: #f00;
+  right: 0px;
+  top: 0px;
 }
 /*
  * Original version: 1.0 © 2010 Andrew Valums ( andrew(at)valums.com )
