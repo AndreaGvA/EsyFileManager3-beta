@@ -9,14 +9,16 @@ function listfiles() {
 			dir : o.files.dir
 		},
 		success : function(data) {
-			$.each(data, function(i, value) {
-				
-				icon = dropIconClass(value.file);
-				$fileTpl = fileTemplate(value.file, icon, value.size);
-				//files template + draggable
-				$($fileTpl).appendTo("." + o.prefix + "list");
-				//files selection
-			});
+			//debug(data);
+			if(!!data) {
+				$.each(data, function(i, value) {
+					icon = dropIconClass(value.file);
+					$fileTpl = fileTemplate(value.file, icon, value.size);
+					//files template + draggable
+					$($fileTpl).appendTo("." + o.prefix + "list");
+					//files selection
+				});
+			}
 			debug("[EsyFileManager 3.0.0] - FILE LISTING COMPLETE - ref: files.js - LINE:20");
 			selection();
 			deletefiles();
@@ -138,14 +140,16 @@ function uploader(){
     })
     .on("complete", function(event, id, filename, responseJSON){
     	debug("[EsyFileManager 3.0.0] - UPLOAD COMPLETE - ref: files.js - LINE:136");
-    	debug(event);
-    	debug(id);
-    	debug(filename);
-    	debug(responseJSON);
+    	//debug(event);
+    	//debug(id);
+    	//debug(filename);
+    	//debug(responseJSON);
     	$tpl=fileTemplate(responseJSON.file, responseJSON.info.extension, responseJSON.size);
     	$("."+o.prefix+"list").prepend($tpl);
     	selection();
-    });
+    }).on("totalProgress", function(json, uploadedBytes, totalBytes){
+    	notify_progress(uploadedBytes, totalBytes);
+	});
 }
 
 function dropIconClass($filename) {

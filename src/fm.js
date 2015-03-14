@@ -31,3 +31,15 @@ function info() {
 		debug("[EsyFileManager 3.0.0] - START INFO FUNCTION - ref: fm.js - LINE:33");
 	});
 }
+function notify_progress(progress, total){
+	// total:100=progress:x
+	// (progress*100)/total
+		perc=(progress*100)/total;
+		$("."+o.prefix+"progress div").css("width", perc+"%");
+		if(perc==100){
+			setTimeout(function(){
+				debug("[EsyFileManager 3.0.0] - 100% PROGRESS BAR - ref: fm.js - LINE:41");
+				$("."+o.prefix+"progress div").animate({width: 0+"px"});
+			}, 300);
+		}
+}

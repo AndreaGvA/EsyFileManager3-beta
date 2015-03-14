@@ -25671,7 +25671,7 @@ $.fn.esyFileManager = function(options) {
     return this.each(function() {
     $this = $(this);
 		debug("[EsyFileManager 3.0.0] - CHECK THE MODE - ref: head.js - LINE:10");
-		debug(o.mode);
+		//debug(o.mode);
 		switch(o.mode.type) {
 			case "button":
 				debug("[EsyFileManager 3.0.0] - ATTACH THE WRAPPER - ref: head.js - LINE:12");
@@ -25708,7 +25708,7 @@ $.fn.esyFileManager = function(options) {
 				debug("[EsyFileManager 3.0.0] - TEMPLATE RENDERING COMPLETE - ref: head.js - LINE:25");
 				//ADJUST HEIGHT FOR RESIZE
 				$h=$("."+o.prefix+"esyFileManager").height();
-				$("."+o.prefix+"files").height($h-75);
+				$("."+o.prefix+"files").height($h-80);
 				$("."+o.prefix+"esyFileManager").fadeIn("slow");
 				$("."+o.prefix+"list").disableSelection();
 				//END
@@ -25728,7 +25728,7 @@ $.fn.esyFileManager = function(options) {
 					resize: function(){
 						debug("[EsyFileManager 3.0.0] - RESIZE FILEMANAGER - ref: head.js - LINE:47");
 						$h=$("."+o.prefix+"esyFileManager").height();
-						$("."+o.prefix+"files").height($h-85);
+						$("."+o.prefix+"files").height($h-80);
 					}
 				});
 				
@@ -25773,6 +25773,11 @@ function fileTemplate(filename, icon, size) {
 	return tpl;
 }
 
+function totalProgressTpl(){
+	$progressbar="<div class='" + o.prefix + "progress'><div></div></div>";
+	return $progressbar;
+}
+
 function functionsTpl() {
 	var tpl = "";
 	if (o.del.allowDelete === true) {
@@ -25786,8 +25791,10 @@ function functionsTpl() {
 	tpl += "</div>";
 	tpl += "<div class='" + o.prefix + "upload'>";
 	tpl += "</div>";
+	tpl += totalProgressTpl();
 	return tpl;
 }
+
 
 function uploaderTpl() {
 	$uploaderTpl='<div type="text/template" id="qq-template">'+
@@ -25855,6 +25862,18 @@ function info() {
 		debug("[EsyFileManager 3.0.0] - START INFO FUNCTION - ref: fm.js - LINE:33");
 	});
 }
+function notify_progress(progress, total){
+	// total:100=progress:x
+	// (progress*100)/total
+		perc=(progress*100)/total;
+		$("."+o.prefix+"progress div").css("width", perc+"%");
+		if(perc==100){
+			setTimeout(function(){
+				debug("[EsyFileManager 3.0.0] - 100% PROGRESS BAR - ref: fm.js - LINE:41");
+				$("."+o.prefix+"progress div").animate({width: 0+"px"});
+			}, 300);
+		}
+}
 function listfiles() {
 	debug("[EsyFileManager 3.0.0] - START FILE LISTING - ref: files.js - LINE:2");
 	$.ajax({
@@ -25866,14 +25885,16 @@ function listfiles() {
 			dir : o.files.dir
 		},
 		success : function(data) {
-			$.each(data, function(i, value) {
-				
-				icon = dropIconClass(value.file);
-				$fileTpl = fileTemplate(value.file, icon, value.size);
-				//files template + draggable
-				$($fileTpl).appendTo("." + o.prefix + "list");
-				//files selection
-			});
+			//debug(data);
+			if(!!data) {
+				$.each(data, function(i, value) {
+					icon = dropIconClass(value.file);
+					$fileTpl = fileTemplate(value.file, icon, value.size);
+					//files template + draggable
+					$($fileTpl).appendTo("." + o.prefix + "list");
+					//files selection
+				});
+			}
 			debug("[EsyFileManager 3.0.0] - FILE LISTING COMPLETE - ref: files.js - LINE:20");
 			selection();
 			deletefiles();
@@ -25995,14 +26016,16 @@ function uploader(){
     })
     .on("complete", function(event, id, filename, responseJSON){
     	debug("[EsyFileManager 3.0.0] - UPLOAD COMPLETE - ref: files.js - LINE:136");
-    	debug(event);
-    	debug(id);
-    	debug(filename);
-    	debug(responseJSON);
+    	//debug(event);
+    	//debug(id);
+    	//debug(filename);
+    	//debug(responseJSON);
     	$tpl=fileTemplate(responseJSON.file, responseJSON.info.extension, responseJSON.size);
     	$("."+o.prefix+"list").prepend($tpl);
     	selection();
-    });
+    }).on("totalProgress", function(json, uploadedBytes, totalBytes){
+    	notify_progress(uploadedBytes, totalBytes);
+	});
 }
 
 function dropIconClass($filename) {
@@ -26294,7 +26317,7 @@ $.fn.disableSelection = function() {
 
 // default options
 $.fn.esyFileManager.defaults = {
-  debug: true,
+  debug: false,
   prefix:"fm-",
   endpoint:'endpoint.php',
   mode: {

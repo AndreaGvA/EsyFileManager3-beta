@@ -32,6 +32,11 @@ function fileTemplate(filename, icon, size) {
 	return tpl;
 }
 
+function totalProgressTpl(){
+	$progressbar="<div class='" + o.prefix + "progress'><div></div></div>";
+	return $progressbar;
+}
+
 function functionsTpl() {
 	var tpl = "";
 	if (o.del.allowDelete === true) {
@@ -45,8 +50,10 @@ function functionsTpl() {
 	tpl += "</div>";
 	tpl += "<div class='" + o.prefix + "upload'>";
 	tpl += "</div>";
+	tpl += totalProgressTpl();
 	return tpl;
 }
+
 
 function uploaderTpl() {
 	$uploaderTpl='<div type="text/template" id="qq-template">'+

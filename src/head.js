@@ -7,7 +7,7 @@ $.fn.esyFileManager = function(options) {
     return this.each(function() {
     $this = $(this);
 		debug("[EsyFileManager 3.0.0] - CHECK THE MODE - ref: head.js - LINE:10");
-		debug(o.mode);
+		//debug(o.mode);
 		switch(o.mode.type) {
 			case "button":
 				debug("[EsyFileManager 3.0.0] - ATTACH THE WRAPPER - ref: head.js - LINE:12");
@@ -44,7 +44,7 @@ $.fn.esyFileManager = function(options) {
 				debug("[EsyFileManager 3.0.0] - TEMPLATE RENDERING COMPLETE - ref: head.js - LINE:25");
 				//ADJUST HEIGHT FOR RESIZE
 				$h=$("."+o.prefix+"esyFileManager").height();
-				$("."+o.prefix+"files").height($h-75);
+				$("."+o.prefix+"files").height($h-80);
 				$("."+o.prefix+"esyFileManager").fadeIn("slow");
 				$("."+o.prefix+"list").disableSelection();
 				//END
@@ -64,7 +64,7 @@ $.fn.esyFileManager = function(options) {
 					resize: function(){
 						debug("[EsyFileManager 3.0.0] - RESIZE FILEMANAGER - ref: head.js - LINE:47");
 						$h=$("."+o.prefix+"esyFileManager").height();
-						$("."+o.prefix+"files").height($h-85);
+						$("."+o.prefix+"files").height($h-80);
 					}
 				});
 				

@@ -16,7 +16,7 @@ $.fn.disableSelection = function() {
 
 // default options
 $.fn.esyFileManager.defaults = {
-  debug: true,
+  debug: false,
   prefix:"fm-",
   endpoint:'endpoint.php',
   mode: {

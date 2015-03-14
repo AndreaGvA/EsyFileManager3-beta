@@ -1,4 +1,4 @@
-###EsyFileManager 3.0.0 - beta
+###EsyFileManager 3.0.1 - beta
 ___
 jQuery Ajax DOM File Manager
 
@@ -37,13 +37,12 @@ options={
 ToDo's:
 
 ```
-1. General Upload Progress Bar
-2. Notification Area
-3. Enable/Disable Notifications
-4. Info area
-5. TinyMce Integration
-6. FilesTree (Handle Directories) Mode
-7. PHP connector for db Usage
+1. Notification Area
+2. Enable/Disable Notifications
+3. Info area
+4. TinyMce Integration
+5. FilesTree (Handle Directories) Mode
+6. PHP connector for db Usage
 
 ```
 
