@@ -21,7 +21,7 @@ function attach() {
 		}
 		
 		debug("[EsyFileManager 3.0.0] - FILE NAME ATTACHED - ref: fm.js - LINE:26");
-		$("."+o.prefix+"esyFileManager").fadeOut("slow", function(){ $(this).remove(); });
+		$("."+o.prefix+"esyFileManager").remove();
 		debug("[EsyFileManager 3.0.0] - ATTACHED FILEMANAGER CLOSED - ref: fm.js - LINE:28");
 	});
 }

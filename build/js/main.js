@@ -25675,9 +25675,12 @@ $.fn.esyFileManager = function(options) {
 		switch(o.mode.type) {
 			case "button":
 				debug("[EsyFileManager 3.0.0] - ATTACH THE WRAPPER - ref: head.js - LINE:12");
-				$this.wrap("<div class='"+o.prefix+"wrapper'></div>");
-				$("."+o.prefix+"wrapper").append("<div class='"+o.prefix+"button "+o.mode.selector+"'></div>");
-				$click=$("."+o.prefix+"button");
+				if($this.parent("."+o.prefix+"wrapper").length == 0) {
+					$this
+						.wrap("<div class='"+o.prefix+"wrapper'></div>")
+						.after("<div class='"+o.prefix+"button "+o.mode.selector+"'></div>");
+				}
+				$click=$("."+o.mode.selector);
 				break;
 			default:
 				$click=$this;
@@ -25852,7 +25855,7 @@ function attach() {
 		}
 		
 		debug("[EsyFileManager 3.0.0] - FILE NAME ATTACHED - ref: fm.js - LINE:26");
-		$("."+o.prefix+"esyFileManager").fadeOut("slow", function(){ $(this).remove(); });
+		$("."+o.prefix+"esyFileManager").remove();
 		debug("[EsyFileManager 3.0.0] - ATTACHED FILEMANAGER CLOSED - ref: fm.js - LINE:28");
 	});
 }
