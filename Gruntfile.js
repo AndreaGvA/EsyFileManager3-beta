@@ -9,7 +9,7 @@ module.exports = function(grunt) {
         banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
         '<%= grunt.template.today("yyyy-mm-dd") %> */',
       },
-      dist: {
+      build: {
         src: [
 	       'bower_components/jquery/dist/jquery.js',
 	       'bower_components/jquery-ui/ui/core.js', 
@@ -20,29 +20,76 @@ module.exports = function(grunt) {
 	       'bower_components/jquery-ui/ui/resizable.js', 
 	       'bower_components/jqueryui-touch-punch/jquery.ui.touch-punch.js', 
 	       'bower_components/fine-uploader/_dist/5.1.3/jquery.fine-uploader/jquery.fine-uploader.js',
-	       'src/head.js',
-	       'src/templates.js',
-	       'src/fm.js',
-	       'src/files.js',
-	       'src/position.js',
-	       'src/options.js'
+	       'dev/head.js',
+	       'dev/templates.js',
+	       'dev/fm.js',
+	       'dev/files.js',
+	       'dev/position.js',
+	       'dev/options.js'
              ],
         dest: 'build/js/main.js',
       },
+      source: {
+        src: [
+	       'dev/head.js',
+	       'dev/templates.js',
+	       'dev/fm.js',
+	       'dev/files.js',
+	       'dev/position.js',
+	       'dev/options.js'
+             ],
+        dest: '_src/js/jquery.esyFileManager.js',
+      },
+      jquery: {
+        src: [
+	       'bower_components/jquery/dist/jquery.js'
+             ],
+        dest: '_src/js/third-party/jquery.js',
+      },
+      ui: {
+        src: [
+	       'bower_components/jquery-ui/ui/core.js', 
+	       'bower_components/jquery-ui/ui/widget.js', 
+	       'bower_components/jquery-ui/ui/mouse.js', 
+	       'bower_components/jquery-ui/ui/draggable.js', 
+	       'bower_components/jquery-ui/ui/droppable.js',
+	       'bower_components/jquery-ui/ui/resizable.js', 
+             ],
+        dest: '_src/js/third-party/jquery.ui.custom.js',
+      },
+      uploader: {
+        src: [
+	       'bower_components/fine-uploader/_dist/5.1.3/jquery.fine-uploader/jquery.fine-uploader.js',
+             ],
+        dest: '_src/js/third-party/jquery.fine-uploader.js',
+      }
     },
     less: {
-	  production: {
+	  build: {
 	    options: {
 	      paths: ["assets/css"]
 	    },
 	    files: {
 	      "build/css/main.css": "less/main.less"
 	    }
+	  },
+	  source: {
+	    options: {
+	      paths: ["assets/css"]
+	    },
+	    files: {
+	      "_src/css/jquery.esyFileManager.css": "less/main.less"
+	    }
 	  }
 	},
+	
     autoprefixer: {
-        single_file: {
+    	
+		single_file: {
 	      src: 'build/css/main.css'
+	   	},
+		single_file: {
+	      src: '_src/css/jquery.esyFileManager.css'
 	    }
     },
     uglify: {
