@@ -7,11 +7,9 @@ $.fn.esyFileManager = function(options) {
   	debug("[EsyFileManager 3.0.0] - DEBUG MODE ACTIVE");
     return this.each(function() {
     $this = $(this);
-		debug("[EsyFileManager 3.0.0] - CHECK THE MODE - ref: head.js - LINE:10");
 		//debug(o.mode);
 		switch(o.mode.type) {
 			case "button":
-				debug("[EsyFileManager 3.0.0] - ATTACH THE WRAPPER - ref: head.js - LINE:12");
 				if($this.parent("."+o.prefix+"wrapper").length == 0) {
 					$this
 						.wrap("<div class='"+o.prefix+"wrapper'></div>")
@@ -23,28 +21,22 @@ $.fn.esyFileManager = function(options) {
 				$click=$this;
 				break;
 		}
-		debug("[EsyFileManager 3.0.0] - THE MODE IS: "+o.mode.type+" - ref: head.js - LINE:17");
 		
 		$click.click(function(){ 
-			debug("[EsyFileManager 3.0.0] - OPEN THE FILEMANAGER - ref: head.js - LINE:20");
 			if($("."+o.prefix+"esyFileManager").length==0){
 				pos=position($this, 10);
 				style="top:"+pos.top+"px; left:"+pos.left+"px; width:"+pos.width+"; height:"+pos.height+";  z-index: 999999;";
 				 
-				debug("[EsyFileManager 3.0.0] - RENDER THE FILEMANAGER TEMPLATE - ref: head.js - LINE:16");
 				$("body").append($(template(style)).hide());
 				close();
 				fullscreen();
 				
-				debug("[EsyFileManager 3.0.0] - RENDER THE FUNCTIONS TEMPLATE - ref: head.js - LINE:19");
 				$(functionsTpl()).appendTo("."+o.prefix+"functions");
 				
 				if($("#qq-template").length==0){
-					debug("[EsyFileManager 3.0.0] - RENDER THE UPLOADER TEMPLATE - ref: head.js - LINE:23");
 					$("body").append($(uploaderTpl()).hide()); 
 				}
 				
-				debug("[EsyFileManager 3.0.0] - TEMPLATE RENDERING COMPLETE - ref: head.js - LINE:25");
 				//ADJUST HEIGHT FOR RESIZE
 				$that=$("."+o.prefix+"esyFileManager");
 				$h=$("."+o.prefix+"esyFileManager").height();
@@ -57,16 +49,13 @@ $.fn.esyFileManager = function(options) {
 				$("."+o.prefix+"esyFileManager").draggable({
 					handle: "."+o.prefix+"head",
 					start: function(){
-						debug("[EsyFileManager 3.0.0] - START DRAGGING THE FILEMANAGER - ref: head.js - LINE:38");
 						$("."+o.prefix+"head").addClass("grabbing");
 					},
 					stop: function(){
-						debug("[EsyFileManager 3.0.0] - STOP DRAGGING THE FILEMANAGER - ref: head.js - LINE:42");
 					    $("."+o.prefix+"head").removeClass("grabbing");
 					}
 				}).resizable({
 					resize: function(){
-						debug("[EsyFileManager 3.0.0] - RESIZE FILEMANAGER - ref: head.js - LINE:47");
 						$h=$("."+o.prefix+"esyFileManager").height();
 						$("."+o.prefix+"files").height($h-80);
 					}
@@ -171,7 +160,6 @@ function uploaderTpl() {
 
 function close() {
 	$("." + o.prefix + "close").click(function() {
-		debug("[EsyFileManager 3.0.0] - CLOSE THE FILEMANAGER - ref: fm.js - LINE:3");
 		$("." + o.prefix + "esyFileManager").remove();
 	});
 }
@@ -182,7 +170,6 @@ function fullscreen() {
 
 function attach() {
 	$("."+o.prefix+"attach").click(function(){
-		debug("[EsyFileManager 3.0.0] - START ATTACH FUNCTION - ref: fm.js - LINE:14");
 		$text=$("."+o.prefix+"selected").children("."+o.prefix+"name").html();
 		
 		if(!!o.files.replace) {
@@ -191,15 +178,12 @@ function attach() {
 			$this.val(o.files.dir+$text);
 		}
 		
-		debug("[EsyFileManager 3.0.0] - FILE NAME ATTACHED - ref: fm.js - LINE:26");
 		$("."+o.prefix+"esyFileManager").remove();
-		debug("[EsyFileManager 3.0.0] - ATTACHED FILEMANAGER CLOSED - ref: fm.js - LINE:28");
 	});
 }
 
 function info() {
 	$("."+o.prefix+"info").click(function(){
-		debug("[EsyFileManager 3.0.0] - START INFO FUNCTION - ref: fm.js - LINE:33");
 		$("<div class='"+o.prefix+"overlay'></div>").hide().appendTo($that).fadeIn("slow", function(){
 			$file=$("."+o.prefix+"selected").children("."+o.prefix+"name").html();
 			$.ajax({
@@ -241,13 +225,11 @@ function notify_progress(progress, total){
 		$("."+o.prefix+"progress div").css("width", perc+"%");
 		if(perc==100){
 			setTimeout(function(){
-				debug("[EsyFileManager 3.0.0] - 100% PROGRESS BAR - ref: fm.js - LINE:41");
 				$("."+o.prefix+"progress div").animate({width: 0+"px"});
 			}, 300);
 		}
 }
 function listfiles() {
-	debug("[EsyFileManager 3.0.0] - START FILE LISTING - ref: files.js - LINE:2");
 	$.ajax({
 		url : o.endpoint,
 		method : "POST",
@@ -267,7 +249,6 @@ function listfiles() {
 					//files selection
 				});
 			}
-			debug("[EsyFileManager 3.0.0] - FILE LISTING COMPLETE - ref: files.js - LINE:20");
 			selection();
 			deletefiles();
 			uploader();
@@ -277,14 +258,11 @@ function listfiles() {
 
 function selection() {
 	$("." + o.prefix + "file").unbind("click").click(function(event) {
-		debug("[EsyFileManager 3.0.0] - START FILE SELECTION - ref: files.js - LINE:30");
 		if (!(event.ctrlKey || event.altKey || event.shiftKey || event.metaKey)) {
-			debug("[EsyFileManager 3.0.0] - SINGLE FILE SELECTION - ref: files.js - LINE:32");
 			$("." + o.prefix + "selected").each(function() {
 				$(this).removeClass(o.prefix + "selected");
 			});
 		} else
-			debug("[EsyFileManager 3.0.0] - MULTIPLE FILE SELECTION - ref: files.js - LINE:36");
 		if ($(this).hasClass(o.prefix + "selected")) {
 			$(this).removeClass(o.prefix + "selected");
 		} else {
@@ -292,13 +270,11 @@ function selection() {
 		}
 
 		if ($("." + o.prefix + "selected").length == 1) {
-			debug("[EsyFileManager 3.0.0] - ENABLE SETTINGS - ref: files.js - LINE:41");
 			$("." + o.prefix + "info").fadeTo("slow", 1).css("cursor", "pointer").unbind("click");
 			$("." + o.prefix + "attach").fadeTo("slow", 1).css("cursor", "pointer").unbind("click");
 			attach();
 			info();
 		} else {
-			debug("[EsyFileManager 3.0.0] - DISABLE SETTINGS - ref: files.js - LINE:44");
 			$("." + o.prefix + "info").fadeTo("slow", 0.5).css("cursor", "").unbind("click");
 			$("." + o.prefix + "attach").fadeTo("slow", 0.5).css("cursor", "").unbind("click");
 		}
@@ -317,12 +293,10 @@ function selection() {
 				left : 30
 			},
 			start : function() {
-				debug("[EsyFileManager 3.0.0] - START DRAGGING FILES - ref: files.js - LINE:62");
 				$(".ui-draggable-dragging").html("");
 				$(".ui-draggable-dragging").addClass("grabbing");
 			},
 			stop : function() {
-				debug("[EsyFileManager 3.0.0] - STOP DRAGGING FILES - ref: files.js - LINE:67");
 			}
 		});
 		//selection();
@@ -337,7 +311,6 @@ function deletefiles() {
 		hoverClass : o.prefix + "delete-on",
 		accept : ":not(.maindir)",
 		drop : function(event, ui) {
-			debug("[EsyFileManager 3.0.0] - START DELETING FILES - ref: files.js - LINE:82");
 			$confirm = confirm(o.del.txtOnDelete);
 			if ($confirm === true) {
 				$files = new Array();
@@ -358,16 +331,13 @@ function deletefiles() {
 					},
 					success : function(data) {
 						//debug(data);
-						o.callback.onDelete(data); 
+						o.call.onDelete(data); 
 						if (data.success === true) {
 							$("." + o.prefix + "selected").each(function() {
 								$(this).closest("li").remove();
 							});
-							debug("[EsyFileManager 3.0.0] - FILES SUCCESFULLY DELETED - ref: files.js - LINE:82");
 						} else
-							debug("[EsyFileManager 3.0.0] - PROBLEM DELETING FILES - ref: files.js - LINE:108");
 						
-						debug("[EsyFileManager 3.0.0] - STOP DELETING FILES - ref: files.js - LINE:108");
 					}
 				});
 				//debug($files);
@@ -388,17 +358,17 @@ function uploader() {
 			}
 		}
 	}).on("complete", function(event, id, filename, responseJSON) {
-		debug("[EsyFileManager 3.0.0] - UPLOAD COMPLETE - ref: files.js - LINE:136");
+		o.call.onUploaded(filename, responseJSON);
 		//debug(event);
 		//debug(id);
 		//debug(filename);
 		//debug(responseJSON);
-		o.callback.onUploaded(filename, responseJson);
+		
 		$tpl = fileTemplate(responseJSON.file, responseJSON.info.extension, responseJSON.size);
 		$("." + o.prefix + "list").prepend($tpl);
 		selection();
 	}).on("totalProgress", function(json, uploadedBytes, totalBytes) {
-		o.callback.totalProgress(json, uploadedBytes, totalBytes);
+		o.call.totalProgress(json, uploadedBytes, totalBytes);
 		notify_progress(uploadedBytes, totalBytes);
 	});
 }
@@ -710,7 +680,7 @@ $.fn.esyFileManager.defaults = {
   	allowDelete: true,
   	txtOnDelete: 'Sei sicuro di voler eliminare i files selezionati',
   },
-  callback:{
+  call:{
   	onDelete: function(data){ },
   	onUploaded: function(file, data){},
   	totalProgress: function(json, uploadedBytes, totalBytes){}
