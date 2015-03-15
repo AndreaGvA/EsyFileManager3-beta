@@ -29,6 +29,38 @@ function attach() {
 function info() {
 	$("."+o.prefix+"info").click(function(){
 		debug("[EsyFileManager 3.0.0] - START INFO FUNCTION - ref: fm.js - LINE:33");
+		$("<div class='"+o.prefix+"overlay'></div>").hide().appendTo($that).fadeIn("slow", function(){
+			$file=$("."+o.prefix+"selected").children("."+o.prefix+"name").html();
+			$.ajax({
+				url: o.endpoint,
+				type: "post",
+				data: {
+					action: "info",
+					dir: o.files.dir,
+					file: $file,
+				},
+				dataType: "json",
+				success: function(data){
+					console.log(data);
+					$("<p><b>File info:</b></p>").appendTo("."+o.prefix+"overlay");
+
+					$.each(data, function(index, value) {
+					  $("<p>"+index+": "+value+"</p>").appendTo("."+o.prefix+"overlay");
+					});
+					if(data.extension=="jpg" || data.extension=="jpeg" || data.extension=="png" || data.extension=="gif") {
+						$("<img src='classes/thumb.php?path="+o.files.dir+data.basename+"' />").load(function(){
+							$(this).appendTo("."+o.prefix+"overlay");
+						});
+					}
+				}
+			});
+			$(this).one("click", function(){
+				$(this).fadeOut("slow", function(){
+					$(this).remove();
+				});
+			});
+		});
+		
 	});
 }
 function notify_progress(progress, total){

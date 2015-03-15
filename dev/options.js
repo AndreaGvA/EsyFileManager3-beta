@@ -16,7 +16,7 @@ $.fn.disableSelection = function() {
 
 // default options
 $.fn.esyFileManager.defaults = {
-  debug: false,
+  debug: true,
   prefix:"fm-",
   endpoint:'endpoint.php',
   mode: {
@@ -32,24 +32,13 @@ $.fn.esyFileManager.defaults = {
   },
   del: {
   	allowDelete: true,
-  	txtOnDelete: 'Sei sicuro di voler eliminare i files selezionati'
+  	txtOnDelete: 'Sei sicuro di voler eliminare i files selezionati',
+  },
+  callback:{
+  	onDelete: function(data){ },
+  	onUploaded: function(file, data){},
+  	totalProgress: function(json, uploadedBytes, totalBytes){}
   }
 };
 
 })(jQuery);
-
-$(".apri").esyFileManager({
-	size:false
-});
-$(".apri2").esyFileManager({
-	mode: {
-		type:"button",
-		selector:"fm-open"	
-	},
-	files:{
-		dir:"uploads2/"
-	},
-	del:{
-		allowDelete: false
-	}
-});

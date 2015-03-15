@@ -29,6 +29,24 @@
   border: 1px solid #eeeeee;
   background-color: #ffffff;
 }
+.fm-esyFileManager .fm-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  color: #ffffff;
+  background-color: #555555;
+  opacity: .9;
+}
+.fm-esyFileManager .fm-overlay p {
+  margin: 0px;
+  padding: 5px;
+  font-size: 12px;
+}
+.fm-esyFileManager .fm-overlay img {
+  width: 90%;
+  margin: 5%;
+}
 .fm-esyFileManager .fm-head {
   position: relative;
   float: left;

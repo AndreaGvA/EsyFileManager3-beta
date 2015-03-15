@@ -17,6 +17,29 @@
 		<script type="application/javascript" src="ckeditor/ckeditor.js"></script>
 		<script type="application/javascript" src="ckeditor/adapters/jquery.js"></script>
 		<script> 
+				
+		$(".apri").esyFileManager({
+			size:false,
+			callback:{
+				onDelete:function(data){
+					console.log(data);
+				}
+			}
+		});
+		$(".apri2").esyFileManager({
+			mode: {
+				type:"button",
+				selector:"fm-open"	
+			},
+			files:{
+				dir:"uploads2/"
+			},
+			del:{
+				allowDelete: true
+			}
+		});
+
+		
 		$( 'textarea.editor' ).ckeditor();
 		CKEDITOR.on( 'dialogDefinition', function( evt ) {
 			console.log(evt.data.name);

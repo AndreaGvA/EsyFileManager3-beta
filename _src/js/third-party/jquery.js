@@ -1,4 +1,4 @@
-/*! esyFileManager3 - v3.0.0 - 2015-03-14 *//*!
+/*! esyFileManager3 - v3.0.1 - 2015-03-15 *//*!
  * jQuery JavaScript Library v1.11.2
  * http://jquery.com/
  *

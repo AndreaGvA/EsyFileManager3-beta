@@ -54,6 +54,7 @@ module.exports = function(grunt) {
 	       'bower_components/jquery-ui/ui/draggable.js', 
 	       'bower_components/jquery-ui/ui/droppable.js',
 	       'bower_components/jquery-ui/ui/resizable.js', 
+	       'bower_components/jqueryui-touch-punch/jquery.ui.touch-punch.js', 
              ],
         dest: '_src/js/third-party/jquery.ui.custom.js',
       },

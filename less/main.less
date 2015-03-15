@@ -44,7 +44,24 @@
   position: absolute;
   border: 1px solid @shade1;
   background-color:@shade0;
- 
+  .fm-overlay{
+    position:absolute;
+    width:100%;
+    height:100%;
+    overflow:auto;
+    color:@shade0;
+    background-color:@shade6;
+    opacity:.9;
+    p{
+      margin:0px;
+      padding:5px;
+      font-size:12px;
+    }
+    img{
+      width:90%;
+      margin:5%;
+    }
+  }
   .fm-head {
     position:relative;
     float:left;
@@ -238,6 +255,7 @@
     right:0px;
     top:0px;
   }
+  
 }
 
 

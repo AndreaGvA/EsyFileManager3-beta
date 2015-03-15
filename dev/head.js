@@ -3,6 +3,7 @@
 $.fn.esyFileManager = function(options) {
   var o = $.extend({}, $.fn.esyFileManager.defaults, options);
   var $this;
+  var $that;
   	debug("[EsyFileManager 3.0.0] - DEBUG MODE ACTIVE");
     return this.each(function() {
     $this = $(this);
@@ -37,7 +38,6 @@ $.fn.esyFileManager = function(options) {
 				
 				debug("[EsyFileManager 3.0.0] - RENDER THE FUNCTIONS TEMPLATE - ref: head.js - LINE:19");
 				$(functionsTpl()).appendTo("."+o.prefix+"functions");
-				attach();
 				
 				if($("#qq-template").length==0){
 					debug("[EsyFileManager 3.0.0] - RENDER THE UPLOADER TEMPLATE - ref: head.js - LINE:23");
@@ -46,6 +46,7 @@ $.fn.esyFileManager = function(options) {
 				
 				debug("[EsyFileManager 3.0.0] - TEMPLATE RENDERING COMPLETE - ref: head.js - LINE:25");
 				//ADJUST HEIGHT FOR RESIZE
+				$that=$("."+o.prefix+"esyFileManager");
 				$h=$("."+o.prefix+"esyFileManager").height();
 				$("."+o.prefix+"files").height($h-80);
 				$("."+o.prefix+"esyFileManager").fadeIn("slow");
