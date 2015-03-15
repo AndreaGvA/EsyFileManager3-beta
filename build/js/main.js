@@ -26022,7 +26022,7 @@ function deletefiles() {
 					},
 					success : function(data) {
 						//debug(data);
-						o.callback.onDelete(data); 
+						o.call.onDelete(data); 
 						if (data.success === true) {
 							$("." + o.prefix + "selected").each(function() {
 								$(this).closest("li").remove();
@@ -26052,17 +26052,18 @@ function uploader() {
 			}
 		}
 	}).on("complete", function(event, id, filename, responseJSON) {
+		o.call.onUploaded(filename, responseJSON);
 		debug("[EsyFileManager 3.0.0] - UPLOAD COMPLETE - ref: files.js - LINE:136");
 		//debug(event);
 		//debug(id);
 		//debug(filename);
 		//debug(responseJSON);
-		o.callback.onUploaded(filename, responseJson);
+		
 		$tpl = fileTemplate(responseJSON.file, responseJSON.info.extension, responseJSON.size);
 		$("." + o.prefix + "list").prepend($tpl);
 		selection();
 	}).on("totalProgress", function(json, uploadedBytes, totalBytes) {
-		o.callback.totalProgress(json, uploadedBytes, totalBytes);
+		o.call.totalProgress(json, uploadedBytes, totalBytes);
 		notify_progress(uploadedBytes, totalBytes);
 	});
 }
@@ -26374,7 +26375,7 @@ $.fn.esyFileManager.defaults = {
   	allowDelete: true,
   	txtOnDelete: 'Sei sicuro di voler eliminare i files selezionati',
   },
-  callback:{
+  call:{
   	onDelete: function(data){ },
   	onUploaded: function(file, data){},
   	totalProgress: function(json, uploadedBytes, totalBytes){}

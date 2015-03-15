@@ -34,7 +34,7 @@ $.fn.esyFileManager.defaults = {
   	allowDelete: true,
   	txtOnDelete: 'Sei sicuro di voler eliminare i files selezionati',
   },
-  callback:{
+  call:{
   	onDelete: function(data){ },
   	onUploaded: function(file, data){},
   	totalProgress: function(json, uploadedBytes, totalBytes){}
