@@ -29,10 +29,16 @@ $.fn.esyFileManager = function(options) {
 			debug("[EsyFileManager 3.0.0] - OPEN THE FILEMANAGER - ref: head.js - LINE:20");
 			if($("."+o.prefix+"esyFileManager").length==0){
 				pos=position($this, 10);
-				style="top:"+pos.top+"px; left:"+pos.left+"px; width:"+pos.width+"; height:"+pos.height+";  z-index: 999999;";
-				 
+				style="top: width:"+pos.width+"; height:"+pos.height+";";
+				
 				debug("[EsyFileManager 3.0.0] - RENDER THE FILEMANAGER TEMPLATE - ref: head.js - LINE:16");
 				$("body").append($(template(style)).hide());
+				$("."+o.prefix+"esyFileManager").position({
+			        my: pos.my,
+			        at: pos.at,
+			        of: pos.of,
+			        collision: "none"
+			    });
 				close();
 				fullscreen();
 				

@@ -44,26 +44,43 @@ function pxToNumber(px) {
 		$h=o.height+"px";
 		
 		if($rightSpace>o.width) {
-			$left=($pos.left+$marginLeft+$paddingLeft+$paddingRight+$width+margin);
-			$top=($pos.top+$marginTop);
+			//$left=($pos.left+$marginLeft+$paddingLeft+$paddingRight+$width+margin);
+			//$top=($pos.top+$marginTop);
+			$my="left top";
+			$at="right+"+margin+" top";
+			$of=$this;
 		} else if($leftSpace>o.width) {
 			//debug($screenWidth-$pos.left);
 			//debug($screenWidth);
 			//Check if i can position the element on the right
-			$left=$pos.left-o.width-margin;
-			$top=($pos.top+$marginTop);
+			$my="right top";
+			$at="left-"+margin+" top";
+			$of=$this;
+			//$left=$pos.left-o.width-margin;
+			//$top=($pos.top+$marginTop);
 		}
+		
+		if(o.position.mode!="auto") {
+			$my=o.position.my;
+			$at=o.position.at
+		}
+		
 	} else {
-		$left=0;
-		$top=0;
+		//$left=0;
+		//$top=0;
+		$my="left top";
+		$at="left top";
+		$of="body";
 		$w="100%";
 		$h="100%";
 	}
 	
+	
   	//Filemanager top & left position
   	var $fm ={
-  		left:$left,
-  		top:$top,
+  		my:$my,
+  		at:$at,
+  		of:$of,
   		width:$w,
   		height: $h
   	};

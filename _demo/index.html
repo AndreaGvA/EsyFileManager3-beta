@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="it">
+	<head>
+		<meta charset="utf-8" />
+		<title>esyFileManager3</title>
+		<link rel="stylesheet" href="css/jquery.esyFileManager_demo.css" />
+		<!--[if IE]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<input type="text" name="file" class='apri' />
+		<div style="text-align:right;"><input type="text" name="file" class='apri2' /></div>
+		
+		<textarea class="editor">Qui il testo</textarea>
+		 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+		<script type="application/javascript" src="js/third-party/jquery.fine-uploader.js"></script>
+		<script type="application/javascript" src="js/third-party/jquery.esyFileManager.js"></script>
+		<script type="application/javascript" src="ckeditor/ckeditor.js"></script>
+		<script type="application/javascript" src="ckeditor/adapters/jquery.js"></script>
+		<script> 
+				
+		$(".apri").esyFileManager({
+			size:false,
+			callback:{
+				onDelete:function(data){
+					console.log(data);
+				}
+			}
+		});
+		$(".apri2").esyFileManager({
+			mode: {
+				type:"button",
+				selector:"fm-open"	
+			},
+			files:{
+				dir:"uploads2/"
+			},
+			del:{
+				allowDelete: true
+			}
+		});
+
+		
+		$( 'textarea.editor' ).ckeditor();
+		CKEDITOR.on( 'dialogDefinition', function( evt ) {
+			console.log(evt.data.name);
+		    if ( evt.data.name == 'image') {
+		        var def = evt.data.definition;
+		
+		        var onShow = def.onShow;
+		        def.onShow = function() {
+		            onShow && onShow.apply( this, arguments );
+		            
+		            var input = this.getContentElement( 'info', 'txtUrl' );
+		            $n=0;
+		            $.each(input, function(i, value){
+		            	//console.log(value);
+		            	
+		            	$input=value.inputId;
+		            	$n++;
+		            	if($n!=0) return false;
+		            });
+		           //console.log($input);
+		            $("#"+$input).esyFileManager({mode:{ type:"button", selector: "fm-openf"}});
+		        };
+		    }
+		    if ( evt.data.name == 'link') {
+		    	var def = evt.data.definition;
+		
+		        var onShow = def.onShow;
+		        def.onShow = function() {
+		            onShow && onShow.apply( this, arguments );
+		            console.log(this);
+		            var input = this.getContentElement( 'info', 'url' );
+		            //input=this.getContentElement('info', 'txtUrl').getInputElement().$.id;
+		            $n=0;
+		            $.each(input, function(i, value){
+		            	//console.log(value);
+		            	
+		            	$input=value.inputId;
+		            	$n++;
+		            	if($n!=0) return false;
+		            });
+		           //console.log($input);
+		            $("#"+$input).esyFileManager({mode:{ type:"button", selector: "fm-openf"}});
+		        };
+		    }
+		} );
+		
+		</script>
+	</body> 
+</html>

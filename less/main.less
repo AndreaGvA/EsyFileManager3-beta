@@ -25,16 +25,19 @@
   font-size:15px;
   padding:10px;
   border:1px solid #ccc;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 .editor{
   width:80%;
 }
-
 *{
   box-sizing: border-box;
 }
 
+
 .fm-esyFileManager {
+  box-sizing: border-box;
   box-shadow:0px -1px 10px -1px rgba(50, 50, 50, 0.42);
   top:0px;
   left:0px;
@@ -44,6 +47,10 @@
   position: absolute;
   border: 1px solid @shade1;
   background-color:@shade0;
+  z-index: 99999;
+  *{
+    box-sizing: border-box;
+  }
   .fm-overlay{
     position:absolute;
     width:100%;
@@ -178,7 +185,7 @@
           position:relative;
           cursor:pointer;
           .fm-name{
-            padding-right:55px;
+            margin-right:75px;
             overflow:hidden;
             height:30px;
           }
@@ -241,19 +248,29 @@
   }
   .fm-open{
     position:absolute;
-    width:40px;
+    width:50px;
     height:40px;
-    background-color:#f00;
+    background:#efefef url(../images/file_manager.png) no-repeat center center;
+    background-size: contain;
     right:0px;
     top:0px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border:1px solid #ccc;
+    cursor:pointer;
   }
   .fm-openf{
     position:absolute;
-    width:40px;
+    width:50px;
     height:100%;
-    background-color:#f00;
+    background:#efefef url(../images/file_manager.png) no-repeat center center;
+    background-size: contain;
     right:0px;
     top:0px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border:1px solid #ccc;
+    cursor:pointer;
   }
   
 }

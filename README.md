@@ -15,29 +15,34 @@ Options:
 
 ```
 options={
-	debug: true,
-	  prefix:"fm-",
-	  endpoint:'endpoint.php',
-	  mode: {
-	  	type: "input", // input || button 
-	  	selector: "fm-open"
-	  },
-	  size: true,
-	  width: 300,
-	  height: 400,
-	  files: {
-	  	dir:"uploads/",
-	  	replace:""
-	  },
-	  del: {
-	  	allowDelete: true,
-	  	txtOnDelete: 'Sei sicuro di voler eliminare i files selezionati',
-	  },
-	  callback:{
-	  	onDelete: function(data){ },
-	  	onUploaded: function(file, data){},
-	  	totalProgress: function(json, uploadedBytes, totalBytes){}
-	  }
+  debug: true,
+  prefix:"fm-",
+  endpoint:'endpoint.php',
+  mode: {
+  	type: "input", // input || button || download || tinyMce
+  	selector: "fm-open"
+  },
+  size: true,
+  width: 300,
+  height: 400,
+  files: {
+  	dir:"uploads/",
+  	replace:""
+  },
+  position: {
+  	mode: "auto", // auto | manual
+  	my: "right top", //only for manual
+  	at: "left top" //only for manual
+  },
+  del: {
+  	allowDelete: true,
+  	txtOnDelete: 'Sei sicuro di voler eliminare i files selezionati',
+  },
+  call:{
+  	onDelete: function(data){ },
+  	onUploaded: function(file, data){},
+  	totalProgress: function(json, uploadedBytes, totalBytes){}
+  }
 }
 
 ```
@@ -45,6 +50,8 @@ options={
 Changelog
 
 ```
+16/03/2015 - Manual positioning with ui .position()
+16/03/2015 - Better auto positioning (still buggy)
 15/03/2015 - File Info and image preview
 15/03/2015 - Callback onDelete, onUploaded, totalProgress
 14/03/2015 - ckEditor connector

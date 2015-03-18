@@ -30,11 +30,16 @@ $.fn.esyFileManager.defaults = {
   	dir:"uploads/",
   	replace:""
   },
+  position: {
+  	mode: "auto", // auto | manual
+  	my: "right top", //only for manual
+  	at: "left top" //only for manual
+  },
   del: {
   	allowDelete: true,
   	txtOnDelete: 'Sei sicuro di voler eliminare i files selezionati',
   },
-  callback:{
+  call:{
   	onDelete: function(data){ },
   	onUploaded: function(file, data){},
   	totalProgress: function(json, uploadedBytes, totalBytes){}

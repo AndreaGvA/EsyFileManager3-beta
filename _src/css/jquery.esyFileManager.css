@@ -11,6 +11,8 @@
   font-size: 15px;
   padding: 10px;
   border: 1px solid #ccc;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 .editor {
   width: 80%;
@@ -19,6 +21,7 @@
   box-sizing: border-box;
 }
 .fm-esyFileManager {
+  box-sizing: border-box;
   box-shadow: 0px -1px 10px -1px rgba(50, 50, 50, 0.42);
   top: 0px;
   left: 0px;
@@ -28,6 +31,10 @@
   position: absolute;
   border: 1px solid #eeeeee;
   background-color: #ffffff;
+  z-index: 99999;
+}
+.fm-esyFileManager * {
+  box-sizing: border-box;
 }
 .fm-esyFileManager .fm-overlay {
   position: absolute;
@@ -167,7 +174,7 @@
   cursor: pointer;
 }
 .fm-esyFileManager .fm-files ul.fm-list li .fm-file .fm-name {
-  padding-right: 55px;
+  margin-right: 75px;
   overflow: hidden;
   height: 30px;
 }
@@ -707,19 +714,29 @@
 }
 .fm-wrapper .fm-open {
   position: absolute;
-  width: 40px;
+  width: 50px;
   height: 40px;
-  background-color: #f00;
+  background: #efefef url(../images/file_manager.png) no-repeat center center;
+  background-size: contain;
   right: 0px;
   top: 0px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border: 1px solid #ccc;
+  cursor: pointer;
 }
 .fm-wrapper .fm-openf {
   position: absolute;
-  width: 40px;
+  width: 50px;
   height: 100%;
-  background-color: #f00;
+  background: #efefef url(../images/file_manager.png) no-repeat center center;
+  background-size: contain;
   right: 0px;
   top: 0px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border: 1px solid #ccc;
+  cursor: pointer;
 }
 /*
  * Original version: 1.0 © 2010 Andrew Valums ( andrew(at)valums.com )
