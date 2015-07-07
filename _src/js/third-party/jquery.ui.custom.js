@@ -1,4 +1,4 @@
-/*! esyFileManager3 - v3.0.1 - 2015-03-17 *//*!
+/*! esyFileManager3 - v3.0.1 - 2015-07-07 *//*!
  * jQuery UI Core 1.11.3
  * http://jqueryui.com
  *

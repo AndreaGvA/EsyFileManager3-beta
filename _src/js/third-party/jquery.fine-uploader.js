@@ -1,4 +1,4 @@
-/*! esyFileManager3 - v3.0.1 - 2015-03-17 *//*!
+/*! esyFileManager3 - v3.0.1 - 2015-07-07 *//*!
 * Fine Uploader
 *
 * Copyright 2015, Widen Enterprises, Inc. info@fineuploader.com
