@@ -54,7 +54,7 @@ $.fn.esyFileManager = function(options) {
 				//ADJUST HEIGHT FOR RESIZE
 				$that=$("."+o.prefix+"esyFileManager");
 				$h=$("."+o.prefix+"esyFileManager").height();
-				$("."+o.prefix+"files").height($h-80);
+				$("."+o.prefix+"files").height($h);
 				$("."+o.prefix+"esyFileManager").fadeIn("slow");
 				$("."+o.prefix+"list").disableSelection();
 				//END
